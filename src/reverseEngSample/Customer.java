@@ -24,7 +24,7 @@ public class Customer {
         int bonusPoints = 0;
 
         for (Rental rental : rentals) {
-            int lineAmount = calculateRentalAmount(rental);
+            int lineAmount = rental.getMovie().calculateRentalAmount(rental.getDaysRented());
             bonusPoints += calculateBonusPoints(rental);
 
             rentalList.append(rental.getMovie().getName()).append("\t").append(lineAmount).append("\n");
@@ -32,33 +32,9 @@ public class Customer {
         }
 
         rentalList.append("Total\t").append(totalAmount).append("\n");
-        rentalList.append("Bonus Points:\t").append(bonusPoints).append("\n");
+        rentalList.append("Bonus Point:\t").append(bonusPoints).append("\n");
 
         return rentalList.toString();
-    }
-
-    private int calculateRentalAmount(Rental rental) {
-        int lineAmount = 0;
-
-        switch (rental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                lineAmount += 2000;
-                if (rental.getDaysRented() > 2) {
-                    lineAmount += (rental.getDaysRented() - 2) * 1500;
-                }
-                break;
-            case Movie.CLASSIC:
-                lineAmount += 1500;
-                if (rental.getDaysRented() > 3) {
-                    lineAmount += (rental.getDaysRented() - 3) * 1500;
-                }
-                break;
-            case Movie.RELEASE:
-                lineAmount += (rental.getDaysRented() * 3000);
-                break;
-        }
-
-        return lineAmount;
     }
 
     private int calculateBonusPoints(Rental rental) {
