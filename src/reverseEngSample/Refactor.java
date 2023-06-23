@@ -8,6 +8,7 @@ public class Refactor {
 
 	@Test
 	public void test() {
+		long startTime = System.currentTimeMillis();
 		Customer me = new Customer("DO");
 		me.addRental(new Rental(10, new Movie("Avengers1", Movie.REGULAR)));
 		me.addRental(new Rental(10, new Movie("Ttanic", Movie.CLASSIC)));
@@ -19,6 +20,10 @@ public class Refactor {
 				+ "Gozilla\t30000\n"
 				+ "Total\t56000\n"
 				+ "Bonus Point:\t4\n");
+		long endTime = System.currentTimeMillis();
+        long executionTime = endTime - startTime;
+
+        System.out.println("Execution time: " + executionTime + " milliseconds");
 		
 		assertEquals(expected, me.statement());
 	}
