@@ -13,3 +13,7 @@ local.properties
 .project
 
 .classpath
+
+### IntelliJ ###
+.idea/
+*.iml
