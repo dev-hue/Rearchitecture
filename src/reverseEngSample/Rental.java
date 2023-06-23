@@ -1,28 +1,19 @@
 package reverseEngSample;
 
 public class Rental {
-	private int daysRented;
-	private Movie movie;
+    private int daysRented;
+    private Movie movie;
 
-	Rental() {		
-	}
+    public Rental(int daysRented, Movie movie) {
+        this.daysRented = daysRented;
+        this.movie = movie;
+    }
 
-	public Rental(int days, Movie myMovie) {
-		setMovie(myMovie);
-		setDaysRented(days);
-	}
+    public int getDaysRented() {
+        return daysRented;
+    }
 
-	private void setMovie(Movie movie) {
-		this.movie = movie;
-	}
-	private void setDaysRented(int daysRented) {
-		this.daysRented = daysRented;
-	}
-
-	public int getDaysRented() {
-		return this.daysRented;
-	}
-	public Movie getMovie() {
-		return this.movie;
-	}
+    public Movie getMovie() {
+        return movie;
+    }
 }
