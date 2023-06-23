@@ -44,6 +44,51 @@ public class Movie {
 
         return calculator.calculateRentalAmount(daysRented);
     }
+
+    public int calculateBonusPoints(int daysRented) {
+        BonusPointsCalculator calculator;
+
+        switch (priceCode) {
+            case REGULAR:
+                calculator = new RegularBonusPointsCalculator();
+                break;
+            case CLASSIC:
+                calculator = new ClassicBonusPointsCalculator();
+                break;
+            case RELEASE:
+                calculator = new ReleaseBonusPointsCalculator();
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid price code");
+        }
+
+        return calculator.calculateBonusPoints(daysRented);
+    }
+}
+
+interface BonusPointsCalculator {
+    int calculateBonusPoints(int daysRented);
+}
+
+class RegularBonusPointsCalculator implements BonusPointsCalculator {
+    @Override
+    public int calculateBonusPoints(int daysRented) {
+        return 1;
+    }
+}
+
+class ClassicBonusPointsCalculator implements BonusPointsCalculator {
+    @Override
+    public int calculateBonusPoints(int daysRented) {
+        return 1;
+    }
+}
+
+class ReleaseBonusPointsCalculator implements BonusPointsCalculator {
+    @Override
+    public int calculateBonusPoints(int daysRented) {
+        return (daysRented > 1) ? 2 : 1;
+    }
 }
 
 interface PriceCalculator {

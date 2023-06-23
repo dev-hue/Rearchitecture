@@ -1,22 +1,23 @@
 package reverseEngSample;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Customer {
-	private String name;
-	private ArrayList<Rental> rentals = new ArrayList<Rental>();
+    private String name;
+    private List<Rental> rentals = new ArrayList<>();
 
-	public Customer(String name) {
-		this.name = name;
-	}
+    public Customer(String name) {
+        this.name = name;
+    }
 
-	public void addRental(Rental newRental) {
-		rentals.add(newRental);
-	}
+    public void addRental(Rental newRental) {
+        rentals.add(newRental);
+    }
 
-	public String getNmae() {
-		return this.name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
     public String statement() {
         StringBuilder rentalList = new StringBuilder("Statement\n");
@@ -25,7 +26,7 @@ public class Customer {
 
         for (Rental rental : rentals) {
             int lineAmount = rental.getMovie().calculateRentalAmount(rental.getDaysRented());
-            bonusPoints += calculateBonusPoints(rental);
+            bonusPoints += rental.getMovie().calculateBonusPoints(rental.getDaysRented());
 
             rentalList.append(rental.getMovie().getName()).append("\t").append(lineAmount).append("\n");
             totalAmount += lineAmount;
@@ -35,15 +36,5 @@ public class Customer {
         rentalList.append("Bonus Point:\t").append(bonusPoints).append("\n");
 
         return rentalList.toString();
-    }
-
-    private int calculateBonusPoints(Rental rental) {
-        int bonusPoints = 1;
-
-        if (rental.getMovie().getPriceCode() == Movie.RELEASE && rental.getDaysRented() > 1) {
-            bonusPoints++;
-        }
-
-        return bonusPoints;
     }
 }
